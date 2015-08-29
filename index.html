@@ -9,4 +9,30 @@
 			
 		</div>
 	</body>
+	
+	<script>
+		var Model = Backbone.Model.extend({
+			url: "/users",
+			defaults: {
+				first: "Bob",
+				last: "Tonks",
+				email: "bob@bob.com"
+			},
+			validate: function(atts, ops) {
+				if (atts.first === "Steve") {
+					return "No Steve's allowed!";
+				}
+			}
+		});
+		
+		var m = new Model();
+		// only on change first name
+		m.on("change:first", function() {
+			console.log(m.isValid());
+			console.log(m.validationError);
+		});
+		console.log(m.isValid());
+		console.log(m.validationError);
+		m.set("first", "Steve");
+	</script>
 </html>
