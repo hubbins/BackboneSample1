@@ -28,7 +28,11 @@
 			{first: "Kate", last: "Smith"},
 			{first: "Joe", last: "Rogers"}
 		]);
+		users.on("change", function(model) {
+			console.log(model.toJSON());
+		});
 		
-		console.log(users.toJSON());
+		var found = users.findWhere({first: "Kate"});
+		found.set("first", "Jill");
 	</script>
 </html>
